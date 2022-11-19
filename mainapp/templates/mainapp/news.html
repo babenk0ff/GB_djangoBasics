@@ -6,38 +6,16 @@
 
   <div class="col-lg-8">
 
-    {% for i in range %}
-    <div class="card my-2">
-      <div class="card-body">
-        <h5 class="card-title">{{ news_title }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">2021-04-29 20-50-26</h6>
-        <p class="card-text">{{ news_preview }}</p>
-        <a href="#" class="card-link">Подробнее</a>
-      </div>
-    </div>
-    {% endfor %}
-
     {% for news_item in object_list %}
       <div class="card my-2">
         <div class="card-body">
           <h5 class="card-title">{{ news_item.title }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ news_item.date }}</h6>
-          <p class="card-text">{{ news_item.text }}</p>
+          <h6 class="card-subtitle mb-2 text-muted">{{ news_item.created_at|date:'d.m.Y H:i ' }}</h6>
+          <p class="card-text">{{ news_item.preamble }}</p>
+          <a href="#" class="card-link">Подробнее</a>
         </div>
       </div>
       {% endfor %}
-
-    <div class="card my-2">
-      <div class="card-body">
-        <h5 class="card-title">Новость из далекого будущего</h5>
-        <h6 class="card-subtitle mb-2 text-muted">2021-04-29 20-50-26</h6>
-        <p class="card-text">Новость из далекого будущего в области космоса. Группа исследователей
-            <a href="{% url 'mainapp:search' %}?search_string=NASA">NASA</a>
-            обнаружили на <a href="{% url 'mainapp:search' %}?search_string=Марс">Марсе</a> следы древней жизни.
-            Правда следов этих пока не нашли, но это не значит, что их там нет.</p>
-        <a href="#" class="card-link">Подробнее</a>
-      </div>
-   </div>
 
   </div>
 

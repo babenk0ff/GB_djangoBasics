@@ -1,0 +1,54 @@
+[
+  {
+    "model": "mainapp.news",
+    "pk": 1,
+    "fields": {
+      "created_at": "2022-10-25T18:43:53.633Z",
+      "updated_at": "2022-10-25T18:43:53.633Z",
+      "deleted": false,
+      "title": "Заголовок новости №1",
+      "preamble": "Вступление",
+      "body": "Текст новости 1",
+      "body_as_markdown": false
+    }
+  },
+  {
+    "model": "mainapp.news",
+    "pk": 2,
+    "fields": {
+      "created_at": "2022-10-25T18:43:53.633Z",
+      "updated_at": "2022-10-25T18:43:53.633Z",
+      "deleted": false,
+      "title": "Заголовок новости №2",
+      "preamble": "Вступление",
+      "body": "Текст новости 2",
+      "body_as_markdown": false
+    }
+  },
+  {
+    "model": "mainapp.news",
+    "pk": 3,
+    "fields": {
+      "created_at": "2022-10-25T18:43:53.633Z",
+      "updated_at": "2022-10-25T18:43:53.633Z",
+      "deleted": false,
+      "title": "Заголовок новости №3",
+      "preamble": "Вступление",
+      "body": "Текст новости 3",
+      "body_as_markdown": false
+    }
+  },
+  {
+    "model": "mainapp.news",
+    "pk": 4,
+    "fields": {
+      "created_at": "2022-10-25T18:43:53.633Z",
+      "updated_at": "2022-10-25T18:43:53.633Z",
+      "deleted": false,
+      "title": "Заголовок новости №4",
+      "preamble": "Вступление",
+      "body": "Текст новости 4",
+      "body_as_markdown": false
+    }
+  }
+]

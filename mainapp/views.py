@@ -1,7 +1,7 @@
-import json
 from django.views.generic import TemplateView
-from django.conf import settings
 from django.http import HttpResponseRedirect
+
+from mainapp.models import News
 
 
 class ContactsView(TemplateView):
@@ -30,12 +30,7 @@ class NewsView(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
 
-        context_data['news_title'] = 'Новостной заголовок'
-        context_data['news_preview'] = 'Превью новости'
-        context_data['range'] = range(5)
-
-        with open(settings.BASE_DIR / 'mainapp/static/mainapp/news.json') as news_file:
-            context_data['object_list'] = json.load(news_file)
+        context_data['object_list'] = News.objects.filter(deleted=False)
 
         return context_data
 
