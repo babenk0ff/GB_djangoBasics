@@ -1,6 +1,9 @@
 from django.db import models
 
 
+NULLABLE = {'blank': True, 'null': True}
+
+
 class CommonModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     updated_at = models.DateTimeField(auto_now_add=True, verbose_name='Обновлен')
