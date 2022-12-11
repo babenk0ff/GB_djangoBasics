@@ -26,6 +26,7 @@ class ContactsView(TemplateView):
 class CoursesListView(ListView):
     template_name = 'mainapp/courses_list.html'
     model = Course
+    paginate_by = 6
 
 
 class DocSiteView(TemplateView):
@@ -42,7 +43,7 @@ class LoginView(TemplateView):
 
 class NewsListView(ListView):
     model = News
-    paginate_by = 5
+    paginate_by = 4
 
     def get_queryset(self):
         return super().get_queryset().filter(deleted=False)
@@ -80,7 +81,7 @@ class NewsDeleteView(PermissionRequiredMixin, DeleteView):
 class CourseDetailView(TemplateView):
     template_name = 'mainapp/courses_detail.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, pk=None, **kwargs):
         context_data = super().get_context_data(**kwargs)
         context_data['course_object'] = get_object_or_404(Course, pk=self.kwargs.get('pk'))
         context_data['lessons'] = Lesson.objects.filter(course=context_data['course_object'])
@@ -107,6 +108,24 @@ class CourseDetailView(TemplateView):
                 course=context_data['course_object'],
                 user=self.request.user
             )
+
+        cached_feedback = cache.get(f"feedback_list_{pk}")
+        if not cached_feedback:
+            context_data["feedback_list"] = (
+                CourseFeedback.objects.filter(course=context_data["course_object"])
+                .select_related()
+            )
+            cache.set(f"feedback_list_{pk}", context_data["feedback_list"], timeout=300)
+
+            # Archive object for tests --->
+            import pickle
+
+            with open(f"mainapp/fixtures/005_feedback_list_{pk}.bin", "wb") as out_file:
+                pickle.dump(context_data["feedback_list"], out_file)
+            # <--- Archive object for tests
+
+        else:
+            context_data["feedback_list"] = cached_feedback
 
         return context_data
 

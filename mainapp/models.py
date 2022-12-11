@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from config import settings
 
@@ -29,8 +30,8 @@ class News(CommonModel):
         return f'{self.pk} {self.title}'
 
     class Meta:
-        verbose_name = 'новость'
-        verbose_name_plural = 'новости'
+        verbose_name = _("News")
+        verbose_name_plural = _("News")
 
 
 class Course(CommonModel):
@@ -45,8 +46,8 @@ class Course(CommonModel):
         return f'{self.pk} {self.name}'
 
     class Meta:
-        verbose_name = 'курс'
-        verbose_name_plural = 'курсы'
+        verbose_name = _("Course")
+        verbose_name_plural = _("Courses")
 
 
 class Lesson(CommonModel):
@@ -55,13 +56,14 @@ class Lesson(CommonModel):
 
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
+    description_as_markdown = models.BooleanField(default=False, verbose_name='Разметка Markdown')
 
     def __str__(self):
         return f'#{self.num} {self.title}'
 
     class Meta:
-        verbose_name = 'урок'
-        verbose_name_plural = 'уроки'
+        verbose_name = _("Lesson")
+        verbose_name_plural = _("Lessons")
 
 
 class CourseTeacher(CommonModel):
@@ -73,8 +75,8 @@ class CourseTeacher(CommonModel):
         return '{0:0>3} {1} {2}'.format(self.pk, self.last_name, self.first_name)
 
     class Meta:
-        verbose_name = 'курс к учителю'
-        verbose_name_plural = 'курс к учителям'
+        verbose_name = _("Teacher")
+        verbose_name_plural = _("Teachers")
 
 
 class CourseFeedback(CommonModel):
@@ -88,14 +90,14 @@ class CourseFeedback(CommonModel):
         (1, '⭐'),
     )
 
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='')
-    rating = models.SmallIntegerField(choices=RATINGS, default=RATING_FIVE, verbose_name='Рейтинг')
-    feedback = models.TextField(verbose_name='Отзыв', default='Без отзыва')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name=_('Course'))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('User'))
+    rating = models.SmallIntegerField(choices=RATINGS, default=RATING_FIVE, verbose_name=_('Rating'))
+    feedback = models.TextField(verbose_name=_('Feedback'), default=_('No feedback'))
 
     class Meta:
-        verbose_name = ''
-        verbose_name_plural = ''
+        verbose_name = _('Feedback')
+        verbose_name_plural = _('Feedbacks')
 
     def __str__(self):
         return f'Отзыв на {self.course} от {self.user}'
