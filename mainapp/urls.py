@@ -15,7 +15,7 @@ urlpatterns = [
     path('search/', views.google_redirect_view, name='search'),
 
     # Courses
-    path('courses_list/', cache_page(3600)(views.CoursesListView.as_view()), name='courses_list'),
+    path('courses_list/', cache_page(300)(views.CoursesListView.as_view()), name='courses_list'),
     path('courses/<int:pk>/detail/', views.CourseDetailView.as_view(), name='courses_detail'),
     path('courses/feedback/', views.CourseFeedbackCreateView.as_view(), name='course_feedback'),
 

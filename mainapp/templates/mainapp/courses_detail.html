@@ -23,7 +23,7 @@
                     <p>
                         <small>Преподаватели</small><br>
                         {% for item in teachers %}
-                            {{ item.name_second }} {{ item.name_first }}{% if forloop.last %}{% else %},{% endif %}
+                            {{ item.last_name }} {{ item.first_name }}{% if forloop.last %}{% else %},{% endif %}
                         {% endfor %}
                     </p>
                 </div>
@@ -38,8 +38,8 @@
                     <p class="text-center mt-2">
                         <small class="text-uppercase">цена</small><br>
                         <span style="font-size: 30pt;">
-                        {{ course_object.cost }}
-                        </span><br>
+            {{ course_object.cost }}
+          </span><br>
                         <a href="#" class="btn btn-outline-primary btn-block"
                            role="button">Купить</a>
                     </p>
@@ -50,8 +50,8 @@
             <p class="text-center">
                 <small class="text-uppercase">цена</small><br>
                 <span style="font-size: 30pt;">
-                {{ course_object.cost }}
-                </span><br>
+        {{ course_object.cost }}
+      </span><br>
                 <a href="#" class="btn btn-outline-primary btn-block"
                    role="button">Купить</a>
             </p>
@@ -59,7 +59,6 @@
     </div>
     <div class="accordion" id="accordionLessons">
 
-        {% cache 300 lessons %}
             {% for item in lessons %}
                 <div class="card">
                     <div class="card-header" id="headLessonPk{{ item.pk }}">
@@ -71,6 +70,7 @@
                             </button>
                         </h2>
                     </div>
+
                     <div id="collapse{{ item.pk }}" class="collapse"
                          aria-labelledby="headLessonPk{{ item.pk }}"
                          data-parent="#accordionLessons">
@@ -91,17 +91,17 @@
                     </div>
                 </div>
             {% endfor %}
-        {% endcache %}
 
     </div>
     <h3>Отзывы</h3>
+
     <div id="feedback_list">
         {% if feedback_list %}
             {% for item in feedback_list %}
                 {% include 'mainapp/incldues/feedback_card.html' %}
             {% endfor %}
         {% else %}
-            <p class="no-feedback">
+            <p id="feedbackBeFirst">
                 No feedback yet. Be first!
             </p>
         {% endif %}
@@ -111,9 +111,11 @@
         <div class="card" id="cardForm">
             <div class="card-body">
                 <h5 class="card-title">Добавить отзыв</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Вы ещё не оставляли отзыв к этому курсу</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Вы ещё не оставляли отзыв к этому
+                    курсу</h6>
                 <p class="card-text">
-                <form action="{% url 'mainapp:course_feedback' %}" method="POST" id="feedbackForm">
+                <form action="{% url 'mainapp:course_feedback' %}" method="POST"
+                      id="feedbackForm">
                     {% csrf_token %}
                     {{ feedback_form|crispy }}
                 </form>
@@ -124,6 +126,7 @@
             </div>
         </div>
     {% endif %}
+
 {% endblock content %}
 
 {% block js %}
