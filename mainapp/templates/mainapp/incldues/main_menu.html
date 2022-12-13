@@ -65,7 +65,7 @@
                         <button type="submit" class="btn btn-link">🇷🇺</button>
                     </form>
                 </div>
-                <div class="col p-0 border-right">
+                <div class="col p-0">
                     <form action="{% url 'set_language' %}" method="post">
                         {% csrf_token %}
                         <input name="language" type="hidden" value="en">
