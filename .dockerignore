@@ -1,0 +1,8 @@
+.gitignore
+locustfile.py
+db.sqlite3
+/docker
+.env.sample
+__pycache__
+docker-compose.yml
+var/log/*

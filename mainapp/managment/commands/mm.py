@@ -9,5 +9,5 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **options):
-        call_command("makemessages", "--locale=ru", "--no-location")
+        call_command('makemessages', '--locale=ru', '--no-location')
         

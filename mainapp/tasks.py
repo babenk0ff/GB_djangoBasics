@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 @shared_task
-def send_feedback_to_email(message_body: str, message_from: int = None) -> None:
+def send_feedback_to_email(message_body: str, message_from: int = None):
     logger.info(f'Send message: from {message_from}, message:"{message_body}"')
     if message_from is not None:
         user_from = User.objects.filter(pk=message_from).first().get_full_name()
